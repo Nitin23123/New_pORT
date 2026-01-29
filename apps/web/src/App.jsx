@@ -33,7 +33,7 @@ function App() {
                     ease: [0.76, 0, 0.24, 1],
                     scale: { duration: 0.4, times: [0, 0.5, 1] }
                 }}
-                className="fixed top-10 z-[60] flex items-center gap-3 cursor-pointer group px-5 py-3"
+                className="fixed top-10 z-60 flex items-center gap-3 cursor-pointer group px-5 py-3"
                 aria-label="Toggle menu"
             >
                 <div className="relative">
