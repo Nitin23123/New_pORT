@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
 import ScrollFrameAnimation from './components/ScrollFrameAnimation'
+import AboutMe from './components/AboutMe'
 
 // Staggered layout configuration matching the reference image style
 const menuItems = [
@@ -217,11 +218,7 @@ function App() {
                 <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
             </section>
 
-            {/* About Me Section */}
-            <section id="about-me" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
-                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>About Me</h2>
-                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
-            </section>
+            <AboutMe />
 
             {/* Projects Section */}
             <section id="projects" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
