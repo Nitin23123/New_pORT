@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Custom Font - DancingScript */
+@font-face {
+  font-family: 'DancingScript';
+  src: url('./fonts/DancingScript-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Custom Font - Dirtyline */
 @font-face {
   font-family: 'Dirtyline';
@@ -33,7 +42,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Dirtyline', 'Syne', system-ui, sans-serif;
+  font-family: 'DancingScript', 'Dirtyline', 'Syne', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }

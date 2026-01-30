@@ -10,7 +10,7 @@ A premium, minimalist portfolio showcasing high-end typography and modern intera
 - **Multilingual Greetings**: A smooth, staggered entry animation cycling through 18+ languages.
 - **Animated Navigation**: A sophisticated menu system that fluidly transitions between states.
 
-## 🛠️ Technologies
+Z` ## 🛠️ Technologies
 
 - **Frontend**: React, Vite
 - **Styling**: Tailwind CSS
