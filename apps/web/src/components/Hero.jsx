@@ -56,13 +56,12 @@ export default function Hero() {
     return (
         <div
             ref={containerRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={resetMouse}
+
             className="h-screen w-full flex flex-col justify-center items-center relative z-0 overflow-hidden bg-black"
             style={{ paddingBottom: '30vh' }}
         >
             <motion.div
-                style={{ x: springX, y: springY }}
+
                 className="text-center select-none relative z-10"
             >
                 {/* Minimalist Greeting Section */}
@@ -71,7 +70,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
                     className="text-zinc-500 text-lg md:text-xl mb-16 tracking-[0.3em] uppercase h-8 overflow-hidden"
-                    style={{ fontFamily: 'DxNacky, sans-serif' }}
+                    style={{ fontFamily: 'DancingScript, cursive' }}
                 >
                     <AnimatePresence>
                         <motion.span
@@ -97,9 +96,9 @@ export default function Hero() {
                     <div className="flex items-center justify-center">
                         <span
                             className="text-[#FDD835] text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mr-8 opacity-80"
-                            style={{ fontFamily: 'DxNacky, sans-serif' }}
+                            style={{ fontFamily: 'DancingScript, cursive' }}
                         >
-                            i'm
+                            I'm
                         </span>
 
                         <div className="flex gap-1 md:gap-2">
@@ -122,7 +121,7 @@ export default function Hero() {
                                             >
                                                 <span
                                                     className="text-lg md:text-2xl font-light text-[#FDD835] tracking-[0.4em]"
-                                                    style={{ fontFamily: 'DxNacky, sans-serif' }}
+                                                    style={{ fontFamily: 'DancingScript, cursive' }}
                                                 >
                                                     {item.word}
                                                 </span>
@@ -139,7 +138,7 @@ export default function Hero() {
                                         }}
                                         transition={{ duration: 0.4 }}
                                         className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter cursor-none inline-block px-1"
-                                        style={{ fontFamily: 'DxNacky, sans-serif' }}
+                                        style={{ fontFamily: 'DancingScript, cursive' }}
                                     >
                                         {item.char}
                                     </motion.span>

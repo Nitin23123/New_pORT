@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
+import ScrollFrameAnimation from './components/ScrollFrameAnimation'
 
 // Staggered layout configuration matching the reference image style
 const menuItems = [
@@ -33,7 +34,7 @@ function App() {
                     ease: [0.76, 0, 0.24, 1],
                     scale: { duration: 0.4, times: [0, 0.5, 1] }
                 }}
-                className="fixed top-10 z-60 flex items-center gap-3 cursor-pointer group px-5 py-3"
+                className="fixed top-10 z-[100] flex items-center gap-3 cursor-pointer group px-5 py-3"
                 aria-label="Toggle menu"
             >
                 <div className="relative">
@@ -46,7 +47,7 @@ function App() {
                                 exit={{ opacity: 0, rotate: 45 }}
                                 transition={{ duration: 0.3 }}
                                 className="text-white text-4xl block"
-                                style={{ fontFamily: 'Dirtyline', color: '#fff' }}
+                                style={{ fontFamily: 'DancingScript', color: '#fff' }}
                             >
                                 +
                             </motion.span>
@@ -58,7 +59,7 @@ function App() {
                                 exit={{ opacity: 0, rotate: -45 }}
                                 transition={{ duration: 0.3 }}
                                 className="text-white text-4xl block"
-                                style={{ fontFamily: 'Dirtyline', color: '#fff' }}
+                                style={{ fontFamily: 'DancingScript', color: '#fff' }}
                             >
                                 +
                             </motion.span>
@@ -76,7 +77,7 @@ function App() {
                                 exit={{ y: -30, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeOut' }}
                                 className="text-white text-2xl uppercase absolute"
-                                style={{ fontFamily: 'Dirtyline', color: '#fff' }}
+                                style={{ fontFamily: 'DancingScript', color: '#fff' }}
                             >
                                 close
                             </motion.span>
@@ -88,7 +89,7 @@ function App() {
                                 exit={{ y: 30, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeOut' }}
                                 className="text-white text-2xl uppercase absolute"
-                                style={{ fontFamily: 'Dirtyline', color: '#fff' }}
+                                style={{ fontFamily: 'DancingScript', color: '#fff' }}
                             >
                                 menu
                             </motion.span>
@@ -114,8 +115,8 @@ function App() {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="w-full flex justify-center mb-4 md:mb-8 shrink-0"
                         >
-                            <h1 className="text-white text-5xl md:text-7xl tracking-tighter" style={{ fontFamily: 'Dirtyline' }}>
-                                NITIN
+                            <h1 className="text-white text-7xl md:text-9xl tracking-tighter" style={{ fontFamily: 'DancingScript' }}>
+                                NITIN<sup className="text-[#FDD835] text-2xl md:text-4xl relative -top-10 md:-top-16 left-2">®</sup>
                             </h1>
                         </motion.div>
 
@@ -132,7 +133,7 @@ function App() {
                                     },
                                 },
                             }}
-                            className="flex flex-col justify-between flex-1 w-full min-h-0"
+                            className="flex flex-col flex-1 w-full min-h-0 pb-24"
                         >
                             {menuItems.map((item, index) => (
                                 <motion.div
@@ -142,7 +143,7 @@ function App() {
                                         visible: { opacity: 1, y: 0 },
                                     }}
                                     transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                                    className="border-b border-dashed border-zinc-700 w-full"
+                                    className="border-b border-dashed border-zinc-700 w-full group hover:bg-white hover:border-white transition-all duration-300"
                                     style={{
                                         textAlign: item.align,
                                     }}
@@ -157,12 +158,12 @@ function App() {
                                         <a
                                             href={`#${item.name.toLowerCase().replace(' ', '-')}`}
                                             onClick={() => setIsMenuOpen(false)}
-                                            className="inline-block text-white text-5xl md:text-6xl lg:text-7xl uppercase hover:opacity-50 transition-opacity duration-300 py-6"
-                                            style={{ fontFamily: 'Dirtyline' }}
+                                            className="inline-block text-white group-hover:text-black text-6xl md:text-7xl lg:text-8xl uppercase transition-colors duration-300 py-14"
+                                            style={{ fontFamily: 'DancingScript' }}
                                         >
                                             {item.name}
                                             {item.count && (
-                                                <sup className="text-lg md:text-xl ml-2 text-zinc-400" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                                <sup className="text-lg md:text-xl ml-2 text-zinc-400 group-hover:text-zinc-600" style={{ fontFamily: 'DancingScript, cursive' }}>
                                                     ({item.count})
                                                 </sup>
                                             )}
@@ -172,8 +173,8 @@ function App() {
                                                 {item.sub.map((subItem) => (
                                                     <span
                                                         key={subItem}
-                                                        className="text-zinc-500 text-sm md:text-base hover:text-white transition-colors cursor-pointer"
-                                                        style={{ fontFamily: 'Inter, sans-serif' }}
+                                                        className="text-zinc-500 text-sm md:text-base group-hover:text-zinc-700 hover:!text-black transition-colors cursor-pointer"
+                                                        style={{ fontFamily: 'DancingScript, cursive' }}
                                                     >
                                                         {subItem}
                                                     </span>
@@ -191,7 +192,7 @@ function App() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8, duration: 0.5 }}
                             className="mt-auto pt-16 flex justify-between text-sm text-zinc-500"
-                            style={{ fontFamily: 'Inter, sans-serif' }}
+                            style={{ fontFamily: 'DancingScript, cursive' }}
                         >
                             <span>(Privacy)</span>
                             <span>2024© Portfolio</span>
@@ -202,6 +203,37 @@ function App() {
             </AnimatePresence>
 
             <Hero />
+            <ScrollFrameAnimation isMenuOpen={isMenuOpen} />
+
+            {/* Tech Stack Section */}
+            <section id="tech-stack" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
+                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>Tech Stack</h2>
+                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
+            </section>
+
+            {/* Experience Section */}
+            <section id="experience" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
+                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>Experience</h2>
+                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
+            </section>
+
+            {/* About Me Section */}
+            <section id="about-me" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
+                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>About Me</h2>
+                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
+            </section>
+
+            {/* Projects Section */}
+            <section id="projects" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
+                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>Projects</h2>
+                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className="min-h-screen w-full flex flex-col justify-center items-center bg-black border-t border-zinc-800">
+                <h2 className="text-white text-6xl md:text-8xl" style={{ fontFamily: 'DancingScript' }}>Contact</h2>
+                <p className="text-zinc-500 mt-4 text-xl">Coming Soon...</p>
+            </section>
         </div>
     )
 }
