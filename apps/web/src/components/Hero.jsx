@@ -1,6 +1,6 @@
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
-import crowdImg from '../assets/crowd.png'
+
 
 const greetings = [
     'Hello', '你好', 'Hola', 'Bonjour', 'Olá', 'Здравствуйте',
@@ -58,7 +58,7 @@ export default function Hero() {
         <div
             ref={containerRef}
 
-            className="h-screen w-full flex flex-col justify-center items-center relative z-0 overflow-hidden bg-black"
+            className="h-screen w-full flex flex-col justify-center items-center relative z-10 overflow-hidden"
             style={{ paddingBottom: '30vh' }}
         >
             <motion.div
@@ -150,18 +150,7 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Crowd Image */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="absolute bottom-2 w-full overflow-hidden pointer-events-none"
-                >
-                    <img
-                        src={crowdImg}
-                        alt="Crowd"
-                        className="w-full h-auto object-cover opacity-5 mix-blend-screen invert"
-                    />
-                </motion.div>
+
             </motion.div>
         </div>
     )

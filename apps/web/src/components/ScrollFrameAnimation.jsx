@@ -1,5 +1,5 @@
+
 import { useEffect, useRef, useState } from 'react'
-import { useScroll } from 'framer-motion'
 
 // Generate frame imports dynamically
 const frameModules = import.meta.glob('../assets/frames/*.webp', { eager: true })
@@ -46,81 +46,104 @@ function removeWhiteBackground(img) {
 
 export default function ScrollFrameAnimation({ isMenuOpen }) {
     const canvasRef = useRef(null)
-    const [imagesLoaded, setImagesLoaded] = useState(false)
-    const loadedImagesRef = useRef([])
+    const [firstFrameLoaded, setFirstFrameLoaded] = useState(false)
+    // Initialize with nulls
+    const loadedImagesRef = useRef(new Array(TOTAL_FRAMES).fill(null))
 
-    const { scrollYProgress } = useScroll()
+    // Animation refs
+    const requestRef = useRef()
+    const previousTimeRef = useRef()
+    const frameIndexRef = useRef(0)
 
-    // Preload all images and process them
+    // Load images
     useEffect(() => {
-        let loadedCount = 0
-        const processedCanvases = []
+        let isMounted = true
 
-        const preloadAndProcess = (src, index) => {
+        const processImage = (src, index) => {
             return new Promise((resolve) => {
                 const img = new Image()
                 img.crossOrigin = 'anonymous'
                 img.src = src
                 img.onload = () => {
+                    if (!isMounted) return
                     // Process image to remove white background
                     const processedCanvas = removeWhiteBackground(img)
-                    processedCanvases[index] = processedCanvas
-                    loadedCount++
+                    loadedImagesRef.current[index] = processedCanvas
+
+                    if (index === 0) {
+                        setFirstFrameLoaded(true)
+                    }
                     resolve(processedCanvas)
                 }
                 img.onerror = () => {
-                    loadedCount++
                     resolve(null)
                 }
             })
         }
 
-        Promise.all(frames.map((src, index) => preloadAndProcess(src, index)))
-            .then(() => {
-                loadedImagesRef.current = processedCanvases
-                setImagesLoaded(true)
+        // Prioritize first frame
+        processImage(frames[0], 0).then(() => {
+            // After first frame is started/done, load the rest
+            // We don't await this, letting it run in background
+            frames.slice(1).forEach((src, idx) => {
+                // Determine actual index since we sliced
+                processImage(src, idx + 1)
             })
-    }, [])
-
-    // Draw frame based on scroll position
-    useEffect(() => {
-        if (!imagesLoaded) return
-
-        const canvas = canvasRef.current
-        if (!canvas) return
-        const context = canvas.getContext('2d', { alpha: true })
-
-        const unsubscribe = scrollYProgress.on('change', (progress) => {
-            const frameIndex = Math.min(
-                Math.floor(progress * TOTAL_FRAMES),
-                TOTAL_FRAMES - 1
-            )
-
-            const processedCanvas = loadedImagesRef.current[frameIndex]
-            if (processedCanvas && context) {
-                if (canvas.width !== processedCanvas.width || canvas.height !== processedCanvas.height) {
-                    canvas.width = processedCanvas.width
-                    canvas.height = processedCanvas.height
-                }
-
-                context.clearRect(0, 0, canvas.width, canvas.height)
-                context.drawImage(processedCanvas, 0, 0)
-            }
         })
 
-        // Draw first frame initially
-        const firstCanvas = loadedImagesRef.current[0]
-        if (firstCanvas && context) {
-            canvas.width = firstCanvas.width
-            canvas.height = firstCanvas.height
-            context.clearRect(0, 0, canvas.width, canvas.height)
-            context.drawImage(firstCanvas, 0, 0)
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
+    // Continuous animation loop
+    const animate = (time) => {
+        if (previousTimeRef.current !== undefined) {
+            // Calculate time difference to control speed if needed
+            // For now, we'll just run as fast as we can but maybe skip frames if it's too fast?
+            // Or update the frame index based on time elapsed
+
+            // Let's target ~30fps -> 33ms per frame
+            const deltaTime = time - previousTimeRef.current
+            if (deltaTime >= 33) {
+                frameIndexRef.current = (frameIndexRef.current + 1) % TOTAL_FRAMES
+                previousTimeRef.current = time
+
+                const canvas = canvasRef.current
+                const context = canvas?.getContext('2d', { alpha: true })
+                const processedCanvas = loadedImagesRef.current[frameIndexRef.current] || loadedImagesRef.current[0]
+
+                if (processedCanvas && context && canvas) {
+                    if (canvas.width !== processedCanvas.width || canvas.height !== processedCanvas.height) {
+                        canvas.width = processedCanvas.width
+                        canvas.height = processedCanvas.height
+                    }
+                    context.clearRect(0, 0, canvas.width, canvas.height)
+                    context.drawImage(processedCanvas, 0, 0)
+                }
+            }
+        } else {
+            previousTimeRef.current = time
         }
 
-        return () => unsubscribe()
-    }, [imagesLoaded, scrollYProgress])
+        requestRef.current = requestAnimationFrame(animate)
+    }
 
-    if (!imagesLoaded) {
+    // Start animation loop when first frame is loaded
+    useEffect(() => {
+        if (!firstFrameLoaded) return
+
+        requestRef.current = requestAnimationFrame(animate)
+
+        return () => {
+            if (requestRef.current) {
+                cancelAnimationFrame(requestRef.current)
+            }
+        }
+    }, [firstFrameLoaded])
+
+    if (!firstFrameLoaded) {
+        // Show spinner only until first frame is ready
         return (
             <div className="fixed top-8 left-8 z-50 w-24 h-24 flex items-center justify-center">
                 <div className="w-8 h-8 border-2 border-[#FDD835] border-t-transparent rounded-full animate-spin" />
