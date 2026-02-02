@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
-import ScrollFrameAnimation from './components/ScrollFrameAnimation'
+
 import LoadingScreen from './components/LoadingScreen'
-import Hyperspeed from './components/Hyperspeed'
+
 
 
 // Staggered layout configuration matching the reference image style
@@ -21,7 +21,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(true)
 
     return (
-        <div className="min-h-screen bg-black relative">
+        <div className="min-h-screen bg-white relative">
             <AnimatePresence mode="wait">
                 {isLoading && (
                     <LoadingScreen onComplete={() => setIsLoading(false)} />
@@ -34,48 +34,7 @@ function App() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >
-                    {/* Background Animation */}
-                    <div className="fixed inset-0 z-0">
-                        <Hyperspeed
-                            effectOptions={{
-                                onSpeedUp: () => { },
-                                onSlowDown: () => { },
-                                distortion: 'turbulentDistortion',
-                                length: 400,
-                                roadWidth: 10,
-                                islandWidth: 2,
-                                lanesPerRoad: 4,
-                                fov: 90,
-                                fovSpeedUp: 150,
-                                speedUp: 2,
-                                carLightsFade: 0.4,
-                                totalSideLightSticks: 20,
-                                lightPairsPerRoadWay: 40,
-                                shoulderLinesWidthPercentage: 0.05,
-                                brokenLinesWidthPercentage: 0.1,
-                                brokenLinesLengthPercentage: 0.5,
-                                lightStickWidth: [0.12, 0.5],
-                                lightStickHeight: [1.3, 1.7],
-                                movingAwaySpeed: [60, 80],
-                                movingCloserSpeed: [-120, -160],
-                                carLightsLength: [400 * 0.03, 400 * 0.2],
-                                carLightsRadius: [0.05, 0.14],
-                                carWidthPercentage: [0.3, 0.5],
-                                carShiftX: [-0.8, 0.8],
-                                carFloorSeparation: [0, 5],
-                                colors: {
-                                    roadColor: 0x080808,
-                                    islandColor: 0x0a0a0a,
-                                    background: 0x000000,
-                                    shoulderLines: 0xffffff,
-                                    brokenLines: 0xffffff,
-                                    leftCars: [0xFFFF00, 0xFDD835, 0xFFEB3B], // Yellow shades
-                                    rightCars: [0xFFFF00, 0xFDD835, 0xFFEB3B], // Yellow shades
-                                    sticks: 0xFFFF00 // Yellow
-                                }
-                            }}
-                        />
-                    </div>
+
 
                     {/* Menu Button */}
                     <motion.button
@@ -105,8 +64,8 @@ function App() {
                                         animate={{ opacity: 1, rotate: 0 }}
                                         exit={{ opacity: 0, rotate: 45 }}
                                         transition={{ duration: 0.3 }}
-                                        className="text-white text-4xl block"
-                                        style={{ fontFamily: 'DancingScript', color: '#fff' }}
+                                        className="text-black text-4xl block"
+                                        style={{ fontFamily: 'DancingScript', color: '#000' }}
                                     >
                                         +
                                     </motion.span>
@@ -117,8 +76,8 @@ function App() {
                                         animate={{ opacity: 1, rotate: 0 }}
                                         exit={{ opacity: 0, rotate: -45 }}
                                         transition={{ duration: 0.3 }}
-                                        className="text-white text-4xl block"
-                                        style={{ fontFamily: 'DancingScript', color: '#fff' }}
+                                        className="text-black text-4xl block"
+                                        style={{ fontFamily: 'DancingScript', color: '#000' }}
                                     >
                                         +
                                     </motion.span>
@@ -135,8 +94,8 @@ function App() {
                                         animate={{ y: 0, opacity: 1 }}
                                         exit={{ y: -30, opacity: 0 }}
                                         transition={{ duration: 0.3, ease: 'easeOut' }}
-                                        className="text-white text-2xl uppercase absolute"
-                                        style={{ fontFamily: 'DancingScript', color: '#fff' }}
+                                        className="text-black text-2xl uppercase absolute"
+                                        style={{ fontFamily: 'DancingScript', color: '#000' }}
                                     >
                                         close
                                     </motion.span>
@@ -147,8 +106,8 @@ function App() {
                                         animate={{ y: 0, opacity: 1 }}
                                         exit={{ y: 30, opacity: 0 }}
                                         transition={{ duration: 0.3, ease: 'easeOut' }}
-                                        className="text-white text-2xl uppercase absolute"
-                                        style={{ fontFamily: 'DancingScript', color: '#fff' }}
+                                        className="text-black text-2xl uppercase absolute"
+                                        style={{ fontFamily: 'DancingScript', color: '#000' }}
                                     >
                                         menu
                                     </motion.span>
@@ -165,7 +124,7 @@ function App() {
                                 animate={{ clipPath: 'circle(150% at calc(100% - 3rem) 3rem)' }}
                                 exit={{ clipPath: 'circle(0% at calc(100% - 3rem) 3rem)' }}
                                 transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-                                className="fixed inset-0 z-40 bg-black flex flex-col px-6 md:px-12 lg:px-24 py-16 md:py-24 h-screen overflow-hidden"
+                                className="fixed inset-0 z-40 bg-white/95 backdrop-blur-3xl flex flex-col px-6 md:px-12 lg:px-24 py-16 md:py-24 h-screen overflow-hidden"
                             >
                                 {/* Top Logo - NITIN */}
                                 <motion.div
@@ -174,7 +133,7 @@ function App() {
                                     transition={{ delay: 0.3, duration: 0.5 }}
                                     className="w-full flex justify-center mb-4 md:mb-8 shrink-0"
                                 >
-                                    <h1 className="text-white text-7xl md:text-9xl tracking-tighter" style={{ fontFamily: 'DancingScript' }}>
+                                    <h1 className="text-black text-7xl md:text-9xl tracking-tighter" style={{ fontFamily: 'DancingScript' }}>
                                         NITIN<sup className="text-[#FDD835] text-2xl md:text-4xl relative -top-10 md:-top-16 left-2">®</sup>
                                     </h1>
                                 </motion.div>
@@ -202,7 +161,7 @@ function App() {
                                                 visible: { opacity: 1, y: 0 },
                                             }}
                                             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                                            className="border-b border-dashed border-zinc-700 w-full group hover:bg-white hover:border-white transition-all duration-300"
+                                            className="border-b border-dashed border-zinc-200 w-full group hover:bg-black/5 hover:border-black/10 transition-all duration-300"
                                             style={{
                                                 textAlign: item.align,
                                             }}
@@ -217,7 +176,7 @@ function App() {
                                                 <a
                                                     href={`#${item.name.toLowerCase().replace(' ', '-')}`}
                                                     onClick={() => setIsMenuOpen(false)}
-                                                    className="inline-block text-white group-hover:text-black text-6xl md:text-7xl lg:text-8xl uppercase transition-colors duration-300 py-14"
+                                                    className="inline-block text-black group-hover:text-black/80 text-6xl md:text-7xl lg:text-8xl uppercase transition-colors duration-300 py-14"
                                                     style={{ fontFamily: 'DancingScript' }}
                                                 >
                                                     {item.name}
@@ -252,7 +211,7 @@ function App() {
                                     transition={{ delay: 0.8, duration: 0.5 }}
                                     className="mt-auto pt-16 w-full flex justify-center items-center"
                                 >
-                                    <span className="text-zinc-500 text-xs tracking-[0.2em] uppercase font-medium hover:text-white transition-colors duration-300">
+                                    <span className="text-zinc-400 text-xs tracking-[0.2em] uppercase font-medium hover:text-black transition-colors duration-300">
                                         © 2026 Portfolio
                                     </span>
                                 </motion.div>
@@ -261,7 +220,7 @@ function App() {
                     </AnimatePresence>
 
                     <Hero />
-                    <ScrollFrameAnimation isMenuOpen={isMenuOpen} />
+
 
 
 

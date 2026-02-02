@@ -23,7 +23,7 @@ export default function LoadingScreen({ onComplete }) {
         <motion.div
             initial={{ y: 0 }}
             exit={{ y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-zinc-900 text-[#FDD835]"
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-white text-black"
         >
             <div className="relative flex flex-col items-center">
                 {/* Large minimal counter */}
@@ -36,14 +36,7 @@ export default function LoadingScreen({ onComplete }) {
                     {count}%
                 </motion.span>
 
-                {/* Subtle loading text */}
-                <motion.div
-                    className="mt-4 text-sm uppercase tracking-[0.5em] text-zinc-500"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { delay: 0.5 } }}
-                >
-                    Loading Portfolio
-                </motion.div>
+
             </div>
         </motion.div>
     )

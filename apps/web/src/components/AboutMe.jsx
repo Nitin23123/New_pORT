@@ -114,15 +114,15 @@ function StatCard({ value, label, delay, icon }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: springX, y: springY, rotateX, rotateY, transformPerspective: 1000 }}
-            className="group relative p-6 rounded-2xl cursor-default overflow-hidden"
+            className="group relative p-6 rounded-2xl cursor-default overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500"
         >
             {/* Glassmorphism background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10" />
+            <div className="absolute inset-0 bg-white border border-zinc-100 rounded-2xl" />
 
             {/* Animated gradient border */}
             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-[-2px] bg-gradient-to-r from-[#FDD835] via-purple-500 to-[#FDD835] rounded-2xl animate-spin-slow" style={{ animationDuration: '3s' }} />
-                <div className="absolute inset-[1px] bg-black rounded-2xl" />
+                <div className="absolute inset-[-2px] bg-gradient-to-r from-[#FDD835] via-zinc-200 to-[#FDD835] rounded-2xl animate-spin-slow" style={{ animationDuration: '3s' }} />
+                <div className="absolute inset-[1px] bg-white rounded-2xl" />
             </div>
 
             {/* Glow effect */}
@@ -130,7 +130,7 @@ function StatCard({ value, label, delay, icon }) {
 
             <div className="relative z-10">
                 <motion.div
-                    className="text-5xl md:text-6xl font-bold text-white mb-2"
+                    className="text-5xl md:text-6xl font-bold text-black mb-2"
                     style={{ fontFamily: 'DancingScript' }}
                 >
                     {typeof value === 'string' && value.match(/\d/) ? (
@@ -182,8 +182,8 @@ function TabButton({ active, onClick, children }) {
         <motion.button
             onClick={handleClick}
             className={`relative px-8 py-4 text-lg uppercase tracking-wider overflow-hidden rounded-full transition-all duration-500 ${active
-                    ? 'bg-[#FDD835] text-black shadow-[0_0_30px_rgba(253,216,53,0.5)]'
-                    : 'bg-zinc-900/50 text-zinc-400 hover:text-white hover:bg-zinc-800/50 border border-zinc-800 hover:border-zinc-600'
+                ? 'bg-black text-white shadow-[0_10px_30px_rgba(0,0,0,0.1)]'
+                : 'bg-zinc-50 text-zinc-500 hover:text-black hover:bg-zinc-100 border border-zinc-200'
                 }`}
             style={{ fontFamily: 'DancingScript' }}
             whileHover={{ scale: 1.05 }}
@@ -227,11 +227,11 @@ function HobbyCard({ hobby, index }) {
             >
                 {/* Front */}
                 <div
-                    className="absolute inset-0 p-6 bg-gradient-to-br from-zinc-900 to-zinc-800 border border-zinc-700 rounded-2xl flex flex-col items-center justify-center backface-hidden"
+                    className="absolute inset-0 p-6 bg-white border border-zinc-100 rounded-2xl flex flex-col items-center justify-center backface-hidden shadow-sm"
                     style={{ backfaceVisibility: 'hidden' }}
                 >
                     <span className="text-5xl mb-2">{hobby.emoji}</span>
-                    <h4 className="text-white text-lg" style={{ fontFamily: 'DancingScript' }}>
+                    <h4 className="text-black text-lg" style={{ fontFamily: 'DancingScript' }}>
                         {hobby.name}
                     </h4>
                 </div>
@@ -263,13 +263,13 @@ function PlaylistItem({ item, index, isPlaying, onPlay }) {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             onClick={onPlay}
-            whileHover={{ x: 10, backgroundColor: "rgba(253, 216, 53, 0.1)" }}
-            className={`group flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all duration-300 ${isPlaying ? 'bg-[#FDD835]/20 border-l-4 border-[#FDD835]' : 'hover:bg-zinc-800/30'
+            whileHover={{ x: 10, backgroundColor: "rgba(0, 0, 0, 0.05)" }}
+            className={`group flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all duration-300 ${isPlaying ? 'bg-black/5 border-l-4 border-black' : 'hover:bg-zinc-100'
                 }`}
         >
             <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-2xl transition-all duration-300 ${isPlaying
-                    ? 'bg-[#FDD835] text-black shadow-[0_0_20px_rgba(253,216,53,0.5)]'
-                    : 'bg-zinc-800 group-hover:bg-zinc-700'
+                ? 'bg-black text-white shadow-[0_10px_20px_rgba(0,0,0,0.1)]'
+                : 'bg-zinc-100 group-hover:bg-zinc-200'
                 }`}>
                 {isPlaying ? (
                     <div className="flex items-end gap-1 h-6">
@@ -288,17 +288,17 @@ function PlaylistItem({ item, index, isPlaying, onPlay }) {
             </div>
 
             <div className="flex-1">
-                <h4 className={`text-lg transition-all duration-300 ${isPlaying ? 'text-[#FDD835]' : 'text-white group-hover:text-[#FDD835]'
+                <h4 className={`text-lg transition-all duration-300 ${isPlaying ? 'text-black font-bold' : 'text-zinc-800 group-hover:text-black'
                     }`} style={{ fontFamily: 'DancingScript' }}>
                     {item.song}
                 </h4>
-                <p className="text-zinc-500 text-sm" style={{ fontFamily: 'DancingScript' }}>
+                <p className="text-zinc-400 text-sm" style={{ fontFamily: 'DancingScript' }}>
                     {item.artist}
                 </p>
             </div>
 
             <motion.div
-                className="text-zinc-500"
+                className="text-zinc-400"
                 whileHover={{ scale: 1.2 }}
             >
                 {isPlaying ? '▶' : '○'}
@@ -325,7 +325,7 @@ function FavoriteCard({ item, index }) {
         >
             {/* Animated gradient background */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-[#FDD835]/20 via-purple-500/20 to-pink-500/20"
+                className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-white to-zinc-50"
                 animate={{
                     opacity: isHovered ? 1 : 0,
                     scale: isHovered ? 1 : 0.8
@@ -333,7 +333,7 @@ function FavoriteCard({ item, index }) {
                 transition={{ duration: 0.3 }}
             />
 
-            <div className="absolute inset-0 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 group-hover:border-[#FDD835]/50 rounded-2xl transition-all duration-300" />
+            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm border border-zinc-100 group-hover:border-black/10 rounded-2xl transition-all duration-300" />
 
             <div className="relative z-10 flex items-center gap-4">
                 <motion.span
@@ -344,10 +344,10 @@ function FavoriteCard({ item, index }) {
                     {item.icon}
                 </motion.span>
                 <div>
-                    <span className="text-zinc-500 text-xs uppercase tracking-wider block" style={{ fontFamily: 'DancingScript' }}>
+                    <span className="text-zinc-400 text-xs uppercase tracking-wider block" style={{ fontFamily: 'DancingScript' }}>
                         {item.category}
                     </span>
-                    <span className="text-white text-xl group-hover:text-[#FDD835] transition-colors" style={{ fontFamily: 'DancingScript' }}>
+                    <span className="text-black text-xl group-hover:text-zinc-900 transition-colors" style={{ fontFamily: 'DancingScript' }}>
                         {item.value}
                     </span>
                 </div>
@@ -402,9 +402,9 @@ function PhotoCarousel() {
         >
             <div className="relative w-full max-w-[280px] mx-auto">
                 {/* Animated border glow */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#FDD835] via-purple-500 to-[#FDD835] rounded-3xl opacity-75 group-hover:opacity-100 blur-sm transition-opacity duration-500 animate-pulse" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-200 rounded-3xl opacity-75 group-hover:opacity-100 blur-sm transition-opacity duration-500 animate-pulse" />
 
-                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-black">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-white">
                     <AnimatePresence initial={false} custom={direction} mode="wait">
                         <motion.img
                             key={currentPhoto}
@@ -427,7 +427,7 @@ function PhotoCarousel() {
                     </AnimatePresence>
 
                     {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent pointer-events-none" />
 
                     {/* Photo info overlay */}
                     <motion.div
@@ -437,7 +437,7 @@ function PhotoCarousel() {
                         transition={{ delay: 0.5 }}
                     >
                         <div className="flex justify-between items-center">
-                            <span className="text-white/80 text-sm" style={{ fontFamily: 'DancingScript' }}>
+                            <span className="text-black/80 text-sm" style={{ fontFamily: 'DancingScript' }}>
                                 {currentPhoto + 1} / {photos.length}
                             </span>
                             <div className="flex gap-2">
@@ -449,8 +449,8 @@ function PhotoCarousel() {
                                             setCurrentPhoto(i)
                                         }}
                                         className={`h-1 rounded-full transition-all duration-300 ${i === currentPhoto
-                                                ? 'w-6 bg-[#FDD835]'
-                                                : 'w-2 bg-white/30 hover:bg-white/60'
+                                            ? 'w-6 bg-black'
+                                            : 'w-2 bg-black/20 hover:bg-black/40'
                                             }`}
                                     />
                                 ))}
@@ -462,12 +462,12 @@ function PhotoCarousel() {
 
             {/* Floating decoration */}
             <motion.div
-                className="absolute -top-4 -right-4 w-20 h-20 border-2 border-[#FDD835]/30 rounded-full"
+                className="absolute -top-4 -right-4 w-20 h-20 border-2 border-zinc-200 rounded-full"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
-                className="absolute -bottom-2 -left-2 w-12 h-12 bg-[#FDD835]/20 rounded-full blur-xl"
+                className="absolute -bottom-2 -left-2 w-12 h-12 bg-zinc-100 rounded-full blur-xl"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
             />
@@ -485,22 +485,22 @@ export default function AboutMe() {
         <section
             id="about-me"
             ref={sectionRef}
-            className="relative min-h-screen w-full py-24 px-6 md:px-12 lg:px-24 bg-black overflow-hidden"
+            className="relative min-h-screen w-full py-24 px-6 md:px-12 lg:px-24 bg-white overflow-hidden"
         >
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <motion.div
-                    className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FDD835]/5 rounded-full blur-3xl"
+                    className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-zinc-100 rounded-full blur-3xl opacity-50"
                     animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                    className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-3xl"
+                    className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-zinc-50 rounded-full blur-3xl opacity-50"
                     animate={{ x: [0, -30, 0], y: [0, 50, 0] }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 />
                 {/* Grid pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 
             {/* Section Header */}
@@ -514,20 +514,20 @@ export default function AboutMe() {
                     initial={{ opacity: 0, x: -30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="inline-block text-[#FDD835] text-sm uppercase tracking-[0.3em] mb-6 px-4 py-2 border border-[#FDD835]/30 rounded-full"
+                    className="inline-block text-black text-sm uppercase tracking-[0.3em] mb-6 px-4 py-2 border border-zinc-200 rounded-full"
                     style={{ fontFamily: 'DancingScript' }}
                 >
                     ✨ Get to know me
                 </motion.span>
 
                 <motion.h2
-                    className="text-white text-6xl md:text-8xl lg:text-9xl tracking-tight"
+                    className="text-black text-6xl md:text-8xl lg:text-9xl tracking-tight"
                     style={{ fontFamily: 'DancingScript' }}
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.3, duration: 0.8 }}
                 >
-                    About <span className="text-[#FDD835]">Me</span>
+                    About <span className="text-zinc-400">Me</span>
                 </motion.h2>
             </motion.div>
 
@@ -546,11 +546,11 @@ export default function AboutMe() {
                         transition={{ delay: 0.4, duration: 0.8 }}
                         className="lg:col-span-1 space-y-6"
                     >
-                        <h3 className="text-white text-3xl md:text-4xl" style={{ fontFamily: 'DancingScript' }}>
-                            Hi, I'm <span className="text-[#FDD835] relative">
+                        <h3 className="text-black text-3xl md:text-4xl" style={{ fontFamily: 'DancingScript' }}>
+                            Hi, I'm <span className="text-black relative">
                                 {personalInfo.name}
                                 <motion.span
-                                    className="absolute -bottom-1 left-0 h-1 bg-[#FDD835]"
+                                    className="absolute -bottom-1 left-0 h-1 bg-black"
                                     initial={{ width: 0 }}
                                     animate={isInView ? { width: "100%" } : {}}
                                     transition={{ delay: 0.8, duration: 0.6 }}
@@ -558,21 +558,21 @@ export default function AboutMe() {
                             </span>
                         </h3>
 
-                        <p className="text-zinc-400 text-lg leading-relaxed" style={{ fontFamily: 'DancingScript' }}>
+                        <p className="text-zinc-600 text-lg leading-relaxed" style={{ fontFamily: 'DancingScript' }}>
                             {personalInfo.bio}
                         </p>
 
                         <div className="flex flex-wrap gap-4 pt-2">
                             <motion.div
-                                className="flex items-center gap-2 text-zinc-400 px-4 py-2 bg-zinc-900/50 rounded-full border border-zinc-800"
-                                whileHover={{ scale: 1.05, borderColor: "rgba(253, 216, 53, 0.5)" }}
+                                className="flex items-center gap-2 text-zinc-600 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(0, 0, 0, 0.1)" }}
                             >
                                 <span>📍</span>
                                 <span style={{ fontFamily: 'DancingScript' }}>{personalInfo.location}</span>
                             </motion.div>
                             <motion.div
-                                className="flex items-center gap-2 text-zinc-400 px-4 py-2 bg-zinc-900/50 rounded-full border border-zinc-800"
-                                whileHover={{ scale: 1.05, borderColor: "rgba(253, 216, 53, 0.5)" }}
+                                className="flex items-center gap-2 text-zinc-600 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100"
+                                whileHover={{ scale: 1.05, borderColor: "rgba(0, 0, 0, 0.1)" }}
                             >
                                 <span>✉️</span>
                                 <span style={{ fontFamily: 'DancingScript' }}>{personalInfo.email}</span>
@@ -581,9 +581,9 @@ export default function AboutMe() {
 
                         <motion.a
                             href="#contact"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-[#FDD835] text-black rounded-full text-lg uppercase tracking-wider mt-6 group overflow-hidden relative"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-full text-lg uppercase tracking-wider mt-6 group overflow-hidden relative"
                             style={{ fontFamily: 'DancingScript' }}
-                            whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(253, 216, 53, 0.4)" }}
+                            whileHover={{ scale: 1.02, boxShadow: "0 10px 40px rgba(0, 0, 0, 0.15)" }}
                             whileTap={{ scale: 0.98 }}
                         >
                             <span className="relative z-10">Let's Talk</span>
@@ -595,7 +595,7 @@ export default function AboutMe() {
                                 →
                             </motion.span>
                             <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-[#FFE566] to-[#FDD835]"
+                                className="absolute inset-0 bg-zinc-800"
                                 initial={{ x: "-100%" }}
                                 whileHover={{ x: 0 }}
                                 transition={{ duration: 0.3 }}
@@ -617,7 +617,7 @@ export default function AboutMe() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.6, duration: 0.8 }}
-                    className="border-t border-zinc-800 pt-16"
+                    className="border-t border-zinc-100 pt-16"
                 >
                     {/* Tab Navigation */}
                     <div className="flex flex-wrap justify-center gap-4 mb-16">
@@ -655,17 +655,17 @@ export default function AboutMe() {
                                     <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/50 rounded-3xl p-8 border border-zinc-800 backdrop-blur-xl">
                                         <div className="flex items-center gap-4 mb-8">
                                             <motion.div
-                                                className="w-20 h-20 bg-gradient-to-br from-[#FDD835] to-orange-500 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(253,216,53,0.3)]"
+                                                className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center shadow-lg"
                                                 animate={{ rotate: [0, 5, -5, 0] }}
                                                 transition={{ duration: 4, repeat: Infinity }}
                                             >
                                                 <span className="text-4xl">🎵</span>
                                             </motion.div>
                                             <div>
-                                                <h4 className="text-white text-2xl" style={{ fontFamily: 'DancingScript' }}>
+                                                <h4 className="text-black text-2xl" style={{ fontFamily: 'DancingScript' }}>
                                                     My Vibe
                                                 </h4>
-                                                <p className="text-zinc-500" style={{ fontFamily: 'DancingScript' }}>
+                                                <p className="text-zinc-400" style={{ fontFamily: 'DancingScript' }}>
                                                     {currentPlaylist.length} songs • Updated weekly
                                                 </p>
                                             </div>
