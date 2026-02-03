@@ -18,7 +18,7 @@ const menuItems = [
 
 function App() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <div className="min-h-screen bg-white relative">
