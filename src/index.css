@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbar hide if needed */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
