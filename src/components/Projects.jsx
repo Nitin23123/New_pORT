@@ -5,21 +5,19 @@ import { FaArrowRight } from 'react-icons/fa';
 // Data for selected works
 const projects = [
     {
-        title: "Academic Avenger",
-        category: "EdTech Platform",
-        year: "2024",
-        link: "https://academicavenger.onrender.com/",
-        image: "/Screenshot (65).png"
+        title: "ReconPro",
+        category: "SaaS Landing + Auth API",
+        year: "2026",
+        link: "https://reconpro.info",
+        image: "/previews/reconpro.png",
     },
-
-
     {
-        title: "CityWeatherHub",
-        category: "Weather Application",
+        title: "DevTrace",
+        category: "Developer Productivity Dashboard",
         year: "2025",
-        link: "#"
+        link: "https://devtracedash.netlify.app",
+        image: "/previews/devTrace.png",
     },
-
 ];
 
 /**
@@ -43,7 +41,7 @@ const Projects = () => {
     };
 
     return (
-        <section id="projects" className="py-32 bg-transparent text-white relative z-10" onMouseMove={handleMouseMove}>
+        <section id="projects" className="py-16 md:py-32 bg-transparent text-white relative z-10" onMouseMove={handleMouseMove}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
@@ -68,6 +66,7 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
+                            whileTap={{ scale: 0.98, backgroundColor: 'rgba(255,255,255,0.03)' }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredProject(index)}
@@ -85,22 +84,14 @@ const Projects = () => {
                             </div>
 
                             {/* Project Meta & Arrow Icon */}
-                            <div className="flex items-center gap-12 mt-8 md:mt-0 pointer-events-none z-10">
-                                <div className="text-right hidden md:block overflow-hidden">
-                                    <motion.div
-                                        variants={{
-                                            hover: { y: -20 },
-                                            initial: { y: 0 }
-                                        }}
-                                        className="relative transition-transform duration-500"
-                                    >
-                                        <p className="text-sm font-bold uppercase tracking-widest text-accent">{project.category}</p>
-                                        <p className="text-muted text-xs font-mono mt-1">{project.year}</p>
-                                    </motion.div>
+                            <div className="flex items-center justify-between md:justify-end gap-6 md:gap-12 mt-6 md:mt-0 pointer-events-none z-10">
+                                <div className="md:text-right overflow-hidden">
+                                    <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-accent">{project.category}</p>
+                                    <p className="text-muted text-xs font-mono mt-1">{project.year}</p>
                                 </div>
                                 {/* Arrow rotates on hover */}
-                                <div className="relative w-14 h-14 flex items-center justify-center rounded-full border border-white/10 group-hover:border-white/30 group-hover:bg-white/5 transition-all duration-500 backdrop-blur-sm">
-                                    <FaArrowRight className="text-xl text-white transform -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                                <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full border border-white/10 group-hover:border-white/30 group-hover:bg-white/5 transition-all duration-500 backdrop-blur-sm shrink-0">
+                                    <FaArrowRight className="text-lg md:text-xl text-white transform -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
                                 </div>
                             </div>
                         </motion.a>

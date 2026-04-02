@@ -16,6 +16,11 @@
 
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-white overflow-x-hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  * {
+    outline: none;
   }
 }
 

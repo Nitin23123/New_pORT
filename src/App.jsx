@@ -2,6 +2,7 @@ import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import TechStack from './components/TechStack';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -10,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
+import TargetCursor from './components/TargetCursor';
 
 
 
@@ -50,7 +52,7 @@ function App() {
     }, []);
 
     return (
-        <div className="bg-transparent min-h-screen text-black font-sans selection:bg-black selection:text-white cursor-none">
+        <div className="bg-transparent min-h-screen text-black font-sans selection:bg-black selection:text-white md:cursor-none">
             {/* AnimatePresence handles the exit animation of the loading screen */}
             <AnimatePresence mode="wait">
                 {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
@@ -62,11 +64,13 @@ function App() {
             {!isLoading && (
                 <>
                     <CustomCursor />
+                    <TargetCursor targetSelector=".cursor-target" />
                     <Navbar />
                     <Hero />
                     <About />
                     <Experience />
                     <Projects />
+                    <TechStack />
                     <Contact />
                     <Footer />
                 </>
